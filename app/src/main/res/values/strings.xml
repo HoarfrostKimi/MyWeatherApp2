@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">My WeatherApp2</string>
+    <string-array name="cities">
+        <item>长沙</item>
+        <item>武汉</item>
+        <item>北京</item>
+        <item>合肥</item>
+        <item>太原</item>
+        <item>上海</item>
+        <item>衡阳</item>
+        <item>拉萨</item>
+        <item>昆明</item>
+        <item>南昌</item>
+        <item>福州</item>
+        <item>海口</item>
+        <item>澳门</item>
+
+
+    </string-array>
+</resources>
