@@ -119,7 +119,7 @@ public class activity_CityChoice extends Activity {
             Intent intent = new Intent(activity_CityChoice.this, MainActivity.class);
             intent.putExtra("cityId", selectedCity.getCityId());// 传递 cityId
             intent.putExtra("city",selectedCity.getCity());
-            Log.d("HHHHHH","WeatherBeanNow"+selectedCity.getCityId());
+            Log.d("cityId","WeatherBeanNow"+selectedCity.getCityId());
             startActivity(intent);
         });
         recyclerview_choice.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -157,20 +157,16 @@ public class activity_CityChoice extends Activity {
     private List<Integer> getAllCityId(SQLiteDatabase db) {
         List<Integer> cityIds = new ArrayList<>();
         String[] projection = {"cityId"};
-
         Cursor cursor = db.query("mytable", projection, null, null, null, null, null);
-
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 int cityId = cursor.getInt(cursor.getColumnIndexOrThrow("cityId"));
                 cityIds.add(cityId);
             } while (cursor.moveToNext());
         }
-
         if (cursor != null) {
             cursor.close();
         }
-
         return cityIds;
     }
 

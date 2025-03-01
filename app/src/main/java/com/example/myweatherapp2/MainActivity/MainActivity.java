@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerview_forecast;
     private String url1="https://devapi.qweather.com/v7/weather/7d?location=";
     private String url1_2="https://devapi.qweather.com/v7/weather/now?location=";
+    private String url_3="http://restapi.amap.com/v3/ip?key=a6c1cb2db33531f3b58a4e29c1aa02de";
     private String url2="&key=553c7d8605c544e6ba68404ace22873d";
     private int cityID;
     private String city;
@@ -193,6 +194,17 @@ private void parseWeatherData(String weatherJson) {
                 String weatherJson = NetUtil.doGet(url_2);
                 Log.d("MainActivity", "------------Weather JSON--------------: " + weatherJson); // 输出获取到的 JSON 数据
                 Message msg = mHandler.obtainMessage(1, weatherJson);
+                mHandler.sendMessage(msg);
+            } catch (Exception e) {
+                e.printStackTrace();
+                // 可以在这里添加异常处理逻辑，例如显示错误提示信息
+            }
+        }).start();
+        new Thread(() -> {
+            try {
+                String weatherJson = NetUtil.doGet(url_3);
+                Log.d("MainActivity", "------------Weather JSON--------------: " + weatherJson); // 输出获取到的 JSON 数据
+                Message msg = mHandler.obtainMessage(2, weatherJson);
                 mHandler.sendMessage(msg);
             } catch (Exception e) {
                 e.printStackTrace();

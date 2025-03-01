@@ -106,7 +106,6 @@ public class SearchActivity extends Activity {
             @Override
             public void onItemClick(int position) {
                 SearchCityData city = filteredCityList.get(position);
-                Toast.makeText(SearchActivity.this, "点击了: " + city.getLocation(), Toast.LENGTH_SHORT).show();
                 // 将城市名称和 ID 插入到数据库中
                 String[] split = city.getLocation().split("-");
                 String cityname = split[0];
