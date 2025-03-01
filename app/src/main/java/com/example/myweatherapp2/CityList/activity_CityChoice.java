@@ -134,25 +134,6 @@ public class activity_CityChoice extends Activity {
         }
     }
 
-    private List<String> getAllCity(SQLiteDatabase db) {
-        List<String> cityList = new ArrayList<>(); // 修改变量名为 cityList，避免冲突
-        String[] projection = {"city"};
-
-        Cursor cursor = db.query("mytable", projection, null, null, null, null, null);
-
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
-                String cityName = cursor.getString(cursor.getColumnIndexOrThrow("city")); // 使用不同的变量名
-                cityList.add(cityName); // 将城市名称添加到列表中
-            } while (cursor.moveToNext());
-        }
-
-        if (cursor != null) {
-            cursor.close(); // 关闭 Cursor 资源
-        }
-
-        return cityList;
-    }
 
     private List<Integer> getAllCityId(SQLiteDatabase db) {
         List<Integer> cityIds = new ArrayList<>();
@@ -194,9 +175,7 @@ public class activity_CityChoice extends Activity {
         String[] projection = {"id", "city", "cityId"}; // 定义要查询的列
         String selection = "id = ?"; // 查询条件
         String[] selectionArgs = {String.valueOf(id)}; // 条件参数
-
         Cursor cursor = db.query("mytable", projection, selection, selectionArgs, null, null, null);
-
         if (cursor != null && cursor.moveToFirst()) {
             // 获取各列的索引
             int idIndex = cursor.getColumnIndexOrThrow("id");
@@ -208,11 +187,9 @@ public class activity_CityChoice extends Activity {
             row.put("city", cursor.getString(nameIndex));
             row.put("cityId", String.valueOf(cursor.getInt(cityIdIndex)));
         }
-
         if (cursor != null) {
             cursor.close(); // 关闭 Cursor 资源
         }
-
         return row;
     }
 }

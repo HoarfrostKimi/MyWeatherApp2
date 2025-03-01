@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myweatherapp2.CityList.CityChoiceAdapter.CityChoiceAdapter;
+//用于处理删除以及拖拽
 
 public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
     private CityChoiceAdapter mAdapter;
@@ -14,8 +15,8 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     @Override
     public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-        int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
-        int swipeFlags = ItemTouchHelper.LEFT;
+        int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN; // 上下拖拽
+        int swipeFlags = ItemTouchHelper.LEFT;// 左滑删除
         return makeMovementFlags(dragFlags, swipeFlags);
     }
 
