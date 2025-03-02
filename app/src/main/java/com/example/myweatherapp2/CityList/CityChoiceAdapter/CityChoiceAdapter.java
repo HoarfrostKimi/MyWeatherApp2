@@ -26,20 +26,20 @@ public class CityChoiceAdapter extends RecyclerView.Adapter<CityChoiceAdapter.Ci
         void onItemClick(int position);
     }
 
-
+//初始化函数,传入上下文以及城市
     public CityChoiceAdapter(Context context, ArrayList<CityChoiceModel> cityChoiceList) {
         this.CityChoiceList = cityChoiceList;
         this.context = context;
         this.dBhelper = new DBhelper(context);
     }
-
+//创建viewholder实例
     @NonNull
     @Override
     public CityChoiceAdapter.CityChoiceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(this.context).inflate(R.layout.choice_rv, parent, false);
         return new CityChoiceViewHolder(view);
     }
-
+//绑定数据,以及点击事件
     @Override
     public void onBindViewHolder(@NonNull CityChoiceAdapter.CityChoiceViewHolder holder, int position) {
         holder.textView_city.setText(CityChoiceList.get(position).getCity());
@@ -51,18 +51,18 @@ public class CityChoiceAdapter extends RecyclerView.Adapter<CityChoiceAdapter.Ci
             }
         });
     }
-
+//获取数量
     @Override
     public int getItemCount() {
         return this.CityChoiceList.size();
     }
-
+//视图的移动
     @Override
     public void onItemMove(int fromPosition, int toPosition) {
         Collections.swap(CityChoiceList, fromPosition, toPosition);
         notifyItemMoved(fromPosition, toPosition);
     }
-
+//视图的删除
     @Override
     public void onItemDissmiss(int position) {
         int cityId = CityChoiceList.get(position).getId();
@@ -70,7 +70,7 @@ public class CityChoiceAdapter extends RecyclerView.Adapter<CityChoiceAdapter.Ci
         CityChoiceList.remove(position);
         notifyItemRemoved(position);
     }
-
+//绑定控件
     public class CityChoiceViewHolder extends RecyclerView.ViewHolder {
         TextView textView_city, textView_weather_feel, textView_temp;
 

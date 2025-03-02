@@ -64,7 +64,7 @@ public class activity_CityChoice extends Activity {
         String idStr = rowData.get("id");
         if (idStr != null) {
             try {
-                cityId = Integer.parseInt(idStr);
+                cityId = Integer.parseInt(idStr);//将字符串转换为整数
             } catch (NumberFormatException e) {
                 e.printStackTrace();
                 // 可以在这里添加更多的错误处理逻辑，比如显示提示信息
@@ -75,7 +75,7 @@ public class activity_CityChoice extends Activity {
         String cityIdStr = rowData.get("cityId");
         if (cityIdStr != null) {
             try {
-                cityIdFromData = Integer.parseInt(cityIdStr);
+                cityIdFromData = Integer.parseInt(cityIdStr);//将字符串转换为整数
             } catch (NumberFormatException e) {
                 e.printStackTrace();
                 // 可以在这里添加更多的错误处理逻辑，比如显示提示信息
@@ -106,24 +106,43 @@ public class activity_CityChoice extends Activity {
     }
 
     private void initEvent() {
-        //CityChoiceModelData.add(new CityChoiceModel("长沙", "晴 体感26℃", "26℃"));
-        //依照api和数据库添加城市
+        // 初始化城市数据，从数据库和API获取城市信息并添加到 CityChoiceModelData 列表中
         cityadd();
+
+        // 创建 CityChoiceAdapter 实例，并传入当前 Activity 和城市数据列表
         CityChoiceAdapter adapter = new CityChoiceAdapter(activity_CityChoice.this, CityChoiceModelData);
+
+        // 设置 RecyclerView 的适配器为刚刚创建的 CityChoiceAdapter
         recyclerview_choice.setAdapter(adapter);
+
+        // 创建 ItemTouchHelper.Callback 实例，用于处理 RecyclerView 项的拖拽和滑动删除等交互
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
+
+        // 创建 ItemTouchHelper 实例，并将其附加到 RecyclerView 上，以启用拖拽和滑动删除功能
         ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
         touchHelper.attachToRecyclerView(recyclerview_choice);
+
+        // 设置点击事件监听器，当用户点击某个城市时触发
         adapter.setOnItemClickListener(position -> {
-            CityChoiceModel selectedCity = CityChoiceModelData.get(position);  // 获取选中的城市
+            // 获取选中的城市信息
+            CityChoiceModel selectedCity = CityChoiceModelData.get(position);
+
+            // 创建 Intent，跳转到 MainActivity，并传递选中的城市 ID 和城市名称
             Intent intent = new Intent(activity_CityChoice.this, MainActivity.class);
-            intent.putExtra("cityId", selectedCity.getCityId());// 传递 cityId
-            intent.putExtra("city",selectedCity.getCity());
-            Log.d("cityId","WeatherBeanNow"+selectedCity.getCityId());
+            intent.putExtra("cityId", selectedCity.getCityId()); // 传递 cityId
+            intent.putExtra("city", selectedCity.getCity());     // 传递城市名称
+
+            // 打印日志，记录选中的城市 ID
+            Log.d("cityId", "WeatherBeanNow" + selectedCity.getCityId());
+
+            // 启动 MainActivity
             startActivity(intent);
         });
+
+        // 设置 RecyclerView 的布局管理器为垂直线性布局
         recyclerview_choice.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
+
 
     private void cityadd() {
         SQLiteDatabase db = dBhelper.getReadableDatabase();

@@ -46,16 +46,16 @@ public class DBhelper extends SQLiteOpenHelper {
         db.close();
         return newRowId;
     }
-
+//删除数据的同时,删除数据库里的数据,然后再重新排列
     public void deleteCityById(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         String whereClause = "id = ?";
-        String[] whereArgs = {String.valueOf(id)};
+        String[] whereArgs = {String.valueOf(id)};//将id转换为字符串类型
         db.delete(TABLE_NAME, whereClause, whereArgs);
         reorderIds(db);
         db.close();
     }
-
+//在记录的时候将id进行重新按顺序排列
     private void reorderIds(SQLiteDatabase db) {
         Cursor cursor = db.query(TABLE_NAME, new String[]{"id"}, null, null, null, null, "id ASC");
         int newId = 1;
