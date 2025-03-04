@@ -141,7 +141,7 @@ public class SearchActivity extends Activity {
             if (cityBean != null && cityBean.getLocation() != null) {
                 allCityList.clear();
                 for (CityBean.LocationBean locationBean : cityBean.getLocation()) {
-                    allCityList.add(new SearchCityData(locationBean.getName() + "-" + locationBean.getAdm1() + "-" + locationBean.getAdm2() + "-" + locationBean.getCountry(), Integer.parseInt(locationBean.getId())));
+                    allCityList.add(new SearchCityData(locationBean.getName() + "-" + locationBean.getAdm2() +"市-" + locationBean.getAdm1() + "-" + locationBean.getCountry(), Integer.parseInt(locationBean.getId())));
                 }
                 filterCities("");
             }

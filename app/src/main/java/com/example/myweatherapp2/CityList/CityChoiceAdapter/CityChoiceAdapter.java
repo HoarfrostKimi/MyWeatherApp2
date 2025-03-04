@@ -22,6 +22,9 @@ public class CityChoiceAdapter extends RecyclerView.Adapter<CityChoiceAdapter.Ci
     Context context;
     private DBhelper dBhelper;
     private OnItemClickListener onItemClickListener;
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
+    }
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
@@ -45,6 +48,7 @@ public class CityChoiceAdapter extends RecyclerView.Adapter<CityChoiceAdapter.Ci
         holder.textView_city.setText(CityChoiceList.get(position).getCity());
         holder.textView_weather_feel.setText(CityChoiceList.get(position).getFeelTemp_weather());
         holder.textView_temp.setText(CityChoiceList.get(position).getTemp());
+        //在这里给接口回调传递的位置
         holder.itemView.setOnClickListener(v -> {
             if (onItemClickListener != null) {
                 onItemClickListener.onItemClick(position);
@@ -81,7 +85,5 @@ public class CityChoiceAdapter extends RecyclerView.Adapter<CityChoiceAdapter.Ci
             textView_temp = itemView.findViewById(R.id.textView_temp);
         }
     }
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.onItemClickListener = listener;
-    }
+
 }

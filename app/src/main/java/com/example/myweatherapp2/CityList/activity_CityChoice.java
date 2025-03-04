@@ -123,21 +123,25 @@ public class activity_CityChoice extends Activity {
         touchHelper.attachToRecyclerView(recyclerview_choice);
 
         // 设置点击事件监听器，当用户点击某个城市时触发
-        adapter.setOnItemClickListener(position -> {
-            // 获取选中的城市信息
-            CityChoiceModel selectedCity = CityChoiceModelData.get(position);
+        adapter.setOnItemClickListener(new CityChoiceAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                // 获取选中的城市信息
+                CityChoiceModel selectedCity = CityChoiceModelData.get(position);
 
-            // 创建 Intent，跳转到 MainActivity，并传递选中的城市 ID 和城市名称
-            Intent intent = new Intent(activity_CityChoice.this, MainActivity.class);
-            intent.putExtra("cityId", selectedCity.getCityId()); // 传递 cityId
-            intent.putExtra("city", selectedCity.getCity());     // 传递城市名称
+                // 创建 Intent，跳转到 MainActivity，并传递选中的城市 ID 和城市名称
+                Intent intent = new Intent(activity_CityChoice.this, MainActivity.class);
+                intent.putExtra("cityId", selectedCity.getCityId()); // 传递 cityId
+                intent.putExtra("city", selectedCity.getCity());     // 传递城市名称
 
-            // 打印日志，记录选中的城市 ID
-            Log.d("cityId", "WeatherBeanNow" + selectedCity.getCityId());
+                // 打印日志，记录选中的城市 ID
+                Log.d("cityId", "WeatherBeanNow" + selectedCity.getCityId());
 
-            // 启动 MainActivity
-            startActivity(intent);
+                // 启动 MainActivity
+                startActivity(intent);
+            }
         });
+
 
         // 设置 RecyclerView 的布局管理器为垂直线性布局
         recyclerview_choice.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
