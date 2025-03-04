@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myweatherapp2.CityList.CityChoiceAdapter.CityChoiceAdapter;
 import com.example.myweatherapp2.CityList.CityChoiceAdapter.CityChoiceModel;
+import com.example.myweatherapp2.CityList.CityChoiceAdapter.OnItemClickListener;
 import com.example.myweatherapp2.CityList.CityChoiceAdapter.SimpleItemTouchHelperCallback;
 import com.example.myweatherapp2.Internet.NetUtil;
 import com.example.myweatherapp2.MainActivity.MainActivity;
@@ -123,7 +124,7 @@ public class activity_CityChoice extends Activity {
         touchHelper.attachToRecyclerView(recyclerview_choice);
 
         // 设置点击事件监听器，当用户点击某个城市时触发
-        adapter.setOnItemClickListener(new CityChoiceAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 // 获取选中的城市信息

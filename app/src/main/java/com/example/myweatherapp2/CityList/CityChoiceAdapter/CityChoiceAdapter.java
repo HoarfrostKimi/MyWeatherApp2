@@ -25,9 +25,7 @@ public class CityChoiceAdapter extends RecyclerView.Adapter<CityChoiceAdapter.Ci
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.onItemClickListener = listener;
     }
-    public interface OnItemClickListener {
-        void onItemClick(int position);
-    }
+
 
 //初始化函数,传入上下文以及城市
     public CityChoiceAdapter(Context context, ArrayList<CityChoiceModel> cityChoiceList) {
